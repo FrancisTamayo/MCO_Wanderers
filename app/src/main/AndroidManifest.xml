@@ -22,7 +22,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".EntryActivity"
+            android:name=".NoteActivity"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".MapActivity"
             android:exported="false">
         </activity>
     </application>

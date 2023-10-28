@@ -5,11 +5,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
+//import com.google.android.gms.maps.GoogleMap;
+//import com.google.android.gms.maps.OnMapReadyCallback;
+//import com.google.android.gms.maps.SupportMapFragment;
+//import com.google.android.gms.maps.model.LatLng;
+//import com.google.android.gms.maps.model.MarkerOptions;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -37,10 +37,21 @@ public class MapActivity extends AppCompatActivity {
                 .position(new LatLng(0, 0))
                 .title("Marker"));
     }*/
-    public void nextAct(View v) {
-        Intent nextIntent = new Intent(this, JournalActivity.class);
+//    public void nextAct(View v) {
+//        Intent nextIntent = new Intent(this, JournalActivity.class);
+//
+//        this.startActivity(nextIntent);
+//        this.finish();
+//    }
 
-        this.startActivity(nextIntent);
-        this.finish();
+    public void locationPicked (View v) {
+        //temp implementation
+        Boolean isMap = getIntent ().getExtras ().getBoolean ("isMap");
+        if (isMap) {
+            Intent i = new Intent(this, NoteActivity.class);
+            i.putExtra("isNewNote", true);
+            this.startActivity (i);
+        }
+        finish ();
     }
 }

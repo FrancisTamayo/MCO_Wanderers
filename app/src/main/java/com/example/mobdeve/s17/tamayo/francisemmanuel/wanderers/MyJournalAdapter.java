@@ -41,9 +41,10 @@ public class MyJournalAdapter extends RecyclerView.Adapter<MyJournalAdapter.View
             @Override
             public void onClick(View v) {
                 /* Remove this and replace it with an intent call*/
-                Intent entryIntent = new Intent(context, EntryActivity.class);
-                entryIntent.putExtra("entryName", myJournalDataList.getEntryName());
-                entryIntent.putExtra("entryDescription", myJournalDataList.getEntryDescription());
+                Intent entryIntent = new Intent(context, NoteActivity.class);
+                entryIntent.putExtra ("isNewNote", false);
+//                entryIntent.putExtra("entryName", myJournalDataList.getEntryName());
+//                entryIntent.putExtra("entryDescription", myJournalDataList.getEntryDescription());
                 //orderIntent.putExtra("foodImage", myFoodDataList.getFoodImage());
                 context.startActivity(entryIntent);
             }

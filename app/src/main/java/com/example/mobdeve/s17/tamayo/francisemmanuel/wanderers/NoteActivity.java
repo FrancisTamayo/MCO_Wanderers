@@ -6,22 +6,28 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
 public class NoteActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
 
-
+    EditText inputLocation;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         Boolean isNewNote = getIntent ().getExtras ().getBoolean ("isNewNote");
+
         if (isNewNote) {
             setContentView(R.layout.blank_note_activity);
             Toast.makeText (this, "Separate blank layout just for UI purposes", Toast.LENGTH_SHORT).show ();
         }
         else
             setContentView(R.layout.note_activity);
+
+        inputLocation = (EditText) findViewById (R.id.inputLocation);
+        inputLocation.setKeyListener (null);
     }
 
     public void backToHome (View v) {
@@ -41,8 +47,8 @@ public class NoteActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     }
 
     public void pickLocation (View v) {
-        //TODO: Intent i = new Intent (this, MAP_ACTIVITY.class);
-        //this.startActivity (i);
+        Intent i = new Intent (this, MapActivity.class);
+        this.startActivity (i);
         Toast.makeText (this, "Location would be updated", Toast.LENGTH_SHORT).show ();
     }
 
