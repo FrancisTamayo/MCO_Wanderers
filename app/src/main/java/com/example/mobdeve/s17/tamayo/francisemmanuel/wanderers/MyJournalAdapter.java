@@ -5,11 +5,14 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class MyJournalAdapter extends RecyclerView.Adapter<MyJournalAdapter.ViewHolder> {
     MyJournalData[] myJournalData;
@@ -32,8 +35,16 @@ public class MyJournalAdapter extends RecyclerView.Adapter<MyJournalAdapter.View
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final MyJournalData myJournalDataList = myJournalData[position];
-        holder.textViewName.setText(myJournalDataList.getEntryName());
-        holder.textViewDesc.setText(myJournalDataList.getEntryDescription());
+        DateFormat noteDateFormat = new SimpleDateFormat ("MMM dd, yyyy");
+        String strDateDesc = noteDateFormat.format (myJournalDataList.getDateModified());
+        Date c = new Date(System.currentTimeMillis ());
+        long milliseconds = c.getTime ();
+
+        if (strDateDesc.equals (noteDateFormat.format (milliseconds)))
+            strDateDesc = "Today";
+
+        holder.textViewName.setText(myJournalDataList.getTitle());
+        holder.textViewDesc.setText("Last Modified: " + strDateDesc);
         //holder.foodImage.setImageResource(myJournalDataList.getFoodImage());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -41,11 +52,21 @@ public class MyJournalAdapter extends RecyclerView.Adapter<MyJournalAdapter.View
             @Override
             public void onClick(View v) {
                 /* Remove this and replace it with an intent call*/
+                long newMilliseconds = new Date (System.currentTimeMillis ()).getTime ();
+                String strDateMade = noteDateFormat.format (myJournalDataList.getDateMade ());
+
+                if (strDateMade.equals (noteDateFormat.format (newMilliseconds)))
+                    strDateMade = "Today";
+
                 Intent entryIntent = new Intent(context, NoteActivity.class);
+
                 entryIntent.putExtra ("isNewNote", false);
-//                entryIntent.putExtra("entryName", myJournalDataList.getEntryName());
-//                entryIntent.putExtra("entryDescription", myJournalDataList.getEntryDescription());
-                //orderIntent.putExtra("foodImage", myFoodDataList.getFoodImage());
+                entryIntent.putExtra (DatabaseHelper._ID, myJournalDataList.getId ());
+                entryIntent.putExtra (DatabaseHelper.TITLE, myJournalDataList.getTitle ());
+                entryIntent.putExtra (DatabaseHelper.CONTENT, myJournalDataList.getContent ());
+                entryIntent.putExtra (DatabaseHelper.DATE_MADE, strDateMade);
+                entryIntent.putExtra (DatabaseHelper.LOCATION, myJournalDataList.getLocation ());
+
                 context.startActivity(entryIntent);
             }
         });

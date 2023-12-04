@@ -39,7 +39,7 @@
             android:background="#00FFFFFF"
             android:clickable="true"
             android:elevation="0dp"
-            android:onClick="deleteNote"
+            android:onClick="showDeletePopup"
             android:paddingLeft="0dp"
             android:paddingTop="0dp"
             app:backgroundTint="#00917373"
@@ -100,7 +100,6 @@
             android:lines="1"
             android:maxLines="1"
             android:singleLine="true"
-            android:text="Oh, Taft"
             android:textSize="34sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -117,12 +116,27 @@
             android:hint="Click here to add location"
             android:inputType="text"
             android:onClick="pickLocation"
-            android:text="Taft, Manila"
             android:textColor="#A8A5A8"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/inputTitle" />
+
+        <EditText
+            android:id="@+id/dateCreated"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="#00FFFFFF"
+            android:ems="10"
+            android:inputType="text"
+            android:onClick="pickLocation"
+            android:text="Today"
+            android:textColor="#A8A5A8"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/inputLocation" />
 
         <EditText
             android:id="@+id/inputNoteText"
@@ -134,10 +148,9 @@
             android:gravity="top"
             android:hint="Type something here..."
             android:inputType="text|textMultiLine"
-            android:text="Mmmmmm... me like taft"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/inputLocation" />
+            app:layout_constraintTop_toBottomOf="@+id/dateCreated" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

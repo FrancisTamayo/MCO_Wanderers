@@ -25,8 +25,7 @@ public class DBManager {
     public void close () { dbHelper.close (); }
 
     public void insert (String title, String content, String location) {
-        Date c = new Date(System.currentTimeMillis ());
-        long milliseconds = c.getTime ();
+        long milliseconds = new Date(System.currentTimeMillis ()).getTime ();
         ContentValues contentValues = new ContentValues ();
 
         contentValues.put (DatabaseHelper.TITLE, title);
@@ -42,7 +41,7 @@ public class DBManager {
         String[] columns = new String[] { DatabaseHelper._ID, DatabaseHelper.TITLE, DatabaseHelper.CONTENT,
         DatabaseHelper.DATE_MADE, DatabaseHelper.DATE_MODIFIED, DatabaseHelper.LOCATION };
 
-        Cursor cursor = database.query (DatabaseHelper.TABLE_NAME, columns, null, null, null, null, null);
+        Cursor cursor = database.query (DatabaseHelper.TABLE_NAME, columns, null, null, null, null, DatabaseHelper.DATE_MODIFIED + " DESC");
         if (cursor != null)
             cursor.moveToFirst ();
 
