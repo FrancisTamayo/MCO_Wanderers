@@ -154,7 +154,7 @@ public class NoteActivity extends AppCompatActivity implements PopupMenu.OnMenuI
             return true;
         }
         else if (menuItem.getItemId () == R.id.confirmDelete) {
-//            dbManager.delete (getIntent ().getExtras ().getLong (DatabaseHelper._ID));
+            dbManager.delete (getIntent ().getExtras ().getLong (DatabaseHelper._ID));
             finish ();
         }
         return false;
